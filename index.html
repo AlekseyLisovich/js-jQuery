@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Котёл алхимика</title>
+        <link rel="stylesheet" type="text/css" href="assets/style.css" />
+    </head>
+
+    <body>
+        <!-- Пример вёрстки котла для экспериментов-->
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <!-- Поле для фильтрации алхимических элементов -->
+                        <input>
+                    </th>
+                    <th>
+                        <!-- Результат смешивания в котле – новый элемент -->
+                        <span>Пар</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <!-- Список доступных элементов (два мы уже положили в котёл)-->
+                        <ul>
+                            <li class="element fire">огонь</li>
+                            <li class="element water">вода</li>
+                            <li class="element air">воздух</li>
+                            <li class="element earth">земля</li>
+                            <li class="element energy">энергия</li>
+                            <li class="element stone">камень</li>
+                            <li class="element life">жизнь</li>
+                            <li class="element milk">молоко</li>
+                            <li class="element sourcream">сметанка</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="block" id="resultBlock1"></div>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="scripts/formulas.js"></script>
+        <script src="scripts/cauldron.js"></script>
+        <script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
+        <script>
+            var elements = [{
+                label: "огонь",
+                selector: ".fire",
+                value: "fire"
+            }, {
+                label: "вода",
+                selector: ".water",
+                value: "water"
+            }, {
+                label: "воздух",
+                selector: ".air",
+                value: "air"
+            }, {
+                label: "земля",
+                selector: ".earth",
+                value: "earth"
+            }, {
+                label: "энергия",
+                selector: ".energy",
+                value: "energy"
+            }, {
+                label: "камень",
+                selector: ".stone",
+                value: "stone"
+            }, {
+                label: "жизнь",
+                selector: ".life",
+                value: "life"
+            }, {
+                label: "молоко",
+                selector: ".milk",
+                value: "milk"
+            }, {
+                label: "сметанка",
+                selector: ".sourcream",
+                value: "sourcream"
+            }];
+
+
+            var selectedElements = [];
+            var initialMarginTopForSelecteItems = "0";
+
+            function onElementRemoved(elem) {
+                console.log("removed", elem);
+                return;
+                selectedElements.splice(selectedElements.indexOf(elem), 1);
+            }
+
+            function onElementAdded(elem) {
+                console.log("added", elem);
+                selectedElements.push(elem);
+                var selectedValues = _.map(selectedElements, "value");
+                if (selectedValues.length > 0) {
+                    var formula = _.find(formulas, function(formula) {
+                        var s = formula.elements.length === selectedValues.length && _.difference(formula.elements, selectedValues).length === 0;
+                    });
+                }
+            }
+
+            elements.forEach(function(elem) {
+                $(elem.selector).click(onElementClick.bind(null, elem));
+            });
+
+            function onElementClick(elem) {
+                if (elem.wasClicked) {
+                    $(elem.selector).animate({
+                        opacity: 1,
+                        marginLeft: "0in",
+                        marginTop: "0in",
+                        fontSize: "1em",
+                        borderWidth: "10px",
+                    }, 1500);
+                    //elementsArray[1] = "";
+                    onElementRemoved(elem);
+                } else {
+                    var marginTop = initialMarginTopForSelecteItems + "0.6" + "in";
+                    $(elem.selector).animate({
+                        opacity: 0.7,
+                        marginLeft: "10in",
+                        marginTop: marginTop,
+                        fontSize: "3em",
+                        borderWidth: "15px",
+                    }, 1500);
+                    onElementAdded(elem);
+                }
+                elem.wasClicked = !elem.wasClicked;
+            }
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,45 @@
+﻿body{
+  background-image: url(../images/boiler.jpg);
+
+  background-size: cover;
+  color: #ffffff;
+}
+.element{
+  cursor: pointer;
+}
+.fire{
+  position: absolute;
+  top: 50px;
+}
+.water{
+  position: absolute;
+  top: 70px;
+}
+.air{
+  position: absolute;
+  top: 90px;
+}
+.earth{
+  position: absolute;
+  top: 110px;
+}
+.energy{
+  position: absolute;
+  top: 130px;
+}
+.stone{
+  position: absolute;
+  top: 150px;
+}
+.life{
+  position: absolute;
+  top: 170px;
+}
+.milk{
+  position: absolute;
+  top: 190px;
+}
+.sourcream{
+  position: absolute;
+  top: 210px;
+}
