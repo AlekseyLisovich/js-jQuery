@@ -1,0 +1,45 @@
+window.boilerElem = [{
+    label: "огонь",
+    selector: ".elem1",
+    value: "fire",
+}, {
+    label: "вода",
+    selector: ".elem2",
+    value: "water"
+}, {
+    label: "земля",
+    selector: ".elem3",
+    value: "earth"
+}, {
+    label: "воздух",
+    selector: ".elem4",
+    value: "air"
+}, {
+    label: "пыль",
+    selector: ".elem5",
+    value: "dust"
+}, {
+    label: "болото",
+    selector: ".elem6",
+    value: "swamp"
+}, {
+    label: "энергия",
+    selector: ".elem7",
+    value: "energy"
+}, {
+    label: "камень",
+    selector: ".elem8",
+    value: "stone"
+}, {
+    label: "жизнь",
+    selector: ".elem9",
+    value: "life"
+}, {
+    label: "молоко",
+    selector: ".elem10",
+    value: "milk"
+}, {
+    label: "сметанка",
+    selector: ".elem11",
+    value: "sourcream"
+}];

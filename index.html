@@ -6,70 +6,20 @@
         <title>Котёл алхимика</title>
         <link rel="stylesheet" type="text/css" href="assets/style.css" />
     </head>
-    <div class="boiler"><img src="images/boiler.jpg" height="200px" width="200px"></div>
 
     <body>
-      <div id="content"></div>
+        <div id="content"></div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        <div class = "title"><label>Выберете ингредиент:</label></div>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <input type="text" id="choose_element" />
-                        <ul id="elements-list">
-                            <li class="element fire">fire</li>
-                            <li class="element water">water</li>
-                            <li class="element earth">earth</li>
-                            <li class="element air">air</li>
-                            <li class="element dust">dust</li>
-                            <li class="element swamp">swamp</li>
-                            <li class="element energy">energy</li>
-                            <li class="element stone">stone</li>
-                            <li class="element life">life</li>
-                            <li class="element milk">milk</li>
-                            <li class="element sourcream">sourcream</li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div id="resultBlock"></div>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
         <script src="scripts/formulas.js"></script>
         <script src="scripts/cauldron.js"></script>
-        <script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
+        <script src="scripts/boilerElements.js"></script>
         <script>
-          $(document).ready(function(){
-            // $("#content").cauldron({
-            //   elements: elements,
-            //   formulas: formulas
-            // });
+            $(document).ready(function() {
+                cauldron.render($("#content"), boilerElem, formulas);
 
-              // cauldron.render("content");
-          });
-
-            // $('')
-            var liElements = document.getElementsByTagName("li");
-            var liTop = 50;
-            var elem;
-
-            for (var i = 0; i < liElements.length; i++) {
-                liTop += 20;
-                elem = liElements[i];
-                elem.style.marginTop += liTop + "px";
-                // elem.innerHTML = value.substr(0, value.length - 4) +
-                //         "<span style='color: red'>" + value.substr(value.length - 4, 2) +
-                //          "</span>" + value.substr(value.length - 2);
-
-            }
+            });
         </script>
 
     </body>

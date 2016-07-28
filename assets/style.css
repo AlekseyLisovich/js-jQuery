@@ -10,7 +10,10 @@
   position: absolute;
   top: 700px;
   left: 42%;
-  text-align: center;
+  background-size: cover; 
+  background-image: url("../images/boiler.jpg");
+  width: 200px;
+  height: 200px;
 }
 #resultBlock{
   text-align: center;
