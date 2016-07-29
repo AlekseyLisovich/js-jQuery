@@ -15,13 +15,13 @@
             var elem = liElements[i];
             var value = elements[i].value;
             if (result !== "")
-                elem.innerHTML = window.search(value, result)
+                elem.innerHTML = search(value, result)
             else
                 elem.innerHTML = elements[i].value;
         }
     }
 
-    window.search = function(text, valueToSearch) {
+    function search(text, valueToSearch) {
         var foundIndex = 0;
         var prevFoundIndex = 0;
         var resultStr = "";
@@ -42,10 +42,13 @@
         return resultStr;
     }
 
+    function clearResult() {
+        document.getElementById('resultBlock').innerHTML = "";
+    }
+
     function onElementRemoved(elem) {
         selectedElements.splice(selectedElements.indexOf(elem), 1);
-        var destinationElement = document.getElementById('resultBlock');
-        destinationElement.innerHTML = "";
+        clearResult();
     }
 
     function onElementAdded(elem) {
@@ -59,6 +62,8 @@
                 var result = foundFormula.result;
                 var destinationElement = document.getElementById('resultBlock');
                 destinationElement.innerHTML = result;
+            } else {
+                clearResult();
             }
         }
     }
@@ -71,6 +76,8 @@
         var elementTopRigth;
 
         if (elem.wasClicked) {
+            onElementRemoved(elem);
+
             clickedLeft = elements.indexOf(_.find(elements, 'wasClicked'));
 
             var tmp = elements[clickedLeft];
@@ -78,6 +85,9 @@
             elements[clickedLeft] = elem;
 
             elementTopLeft = 60 + (clickedLeft + 1) * 20;
+            var animateProps = {
+
+            }
             $(elem.selector).animate({
                 opacity: 1,
                 marginLeft: "0in",
@@ -85,8 +95,8 @@
                 fontSize: "18pt",
                 borderWidth: "10px",
             }, 1500);
-            onElementRemoved(elem);
         } else {
+            onElementAdded(elem);
             clickedRight = _.filter(elements, 'wasClicked').length;
 
             elementTopRigth = 50 + (clickedRight + 1) * 40;
@@ -97,8 +107,8 @@
                 fontSize: "3em",
                 borderWidth: "15px",
             }, 1500);
-            onElementAdded(elem);
         }
+
         elem.wasClicked = !elem.wasClicked;
     }
 
@@ -109,13 +119,15 @@
         var newList = $("<ul id='elements-list'></ul>");
         var liTop = 60;
         var elementIndex = 1;
+        var value;
+        var liElement;
+
         for (var i = 0; i < elements.length; i++) {
-            var value = elements[i].value;
-            var liElement = $("<li>" + value + "</li>");
+            value = elements[i].value;
+            liElement = $("<li>" + value + "</li>");
             liTop += 20;
 
-            $(liElement).addClass("element");
-            $(liElement).addClass("elem" + elementIndex++);
+            $(liElement).addClass("element elem" + elementIndex++);
             $(liElement).css({
                 'marginTop': liTop + 'px'
             });
@@ -125,12 +137,20 @@
         container.append(newList);
         container.append("<div id='resultBlock'></div>");
 
-        $('#choose_element').on('keyup', higlightSearchResult);
+        $('#choose_element').on('keydown', _.debounce(higlightSearchResult, 200));
 
         elements.forEach(function(elem) {
             $(elem.selector).click(onElementClick.bind(null, elem));
         });
     };
+
+    // 1. Исправить ошибку с позиционированием элементов
+    // 2. Оформить как jQuery plugin
+    // 3. Использовать везде jQuery или DOM API
+    // 4. Вынести переменные в константы
+    // 5. Переименовать некоторые переменные
+    // 6. Изменить дизайн тестовой страницы
+    // 7. Исправить рендер в меньшем блоке
 
     window.cauldron = {
         render: renderChauldron
