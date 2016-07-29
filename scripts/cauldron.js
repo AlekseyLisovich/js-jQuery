@@ -82,13 +82,13 @@
                 opacity: 1,
                 marginLeft: "0in",
                 marginTop: elementTopLeft + "px",
-                fontSize: "14pt",
+                fontSize: "18pt",
                 borderWidth: "10px",
             }, 1500);
             onElementRemoved(elem);
         } else {
             clickedRight = _.filter(elements, 'wasClicked').length;
-            console.log(clickedRight);
+
             elementTopRigth = 50 + (clickedRight + 1) * 40;
             $(elem.selector).animate({
                 opacity: 0.7,
